@@ -7,14 +7,12 @@ public class BookDto {
     public String name;
     public Long authorId;
     public Category category;
-    public Integer availableCopies;
     public Long countryId;
 
-    public BookDto(String name, Long authorId, Category category, Integer availableCopies, Long countryId) {
+    public BookDto(String name, Long authorId, Category category,  Long countryId) {
         this.name = name;
         this.authorId = authorId;
         this.category = category;
-        this.availableCopies = availableCopies;
         this.countryId = countryId;
     }
 
@@ -28,10 +26,6 @@ public class BookDto {
 
     public Category getCategory() {
         return category;
-    }
-
-    public Integer getAvailableCopies() {
-        return availableCopies;
     }
 
     public Long getCountryId() {

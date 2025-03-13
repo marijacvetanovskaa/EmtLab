@@ -1,8 +1,6 @@
 package com.example.emt2025main.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 public class Author {
@@ -58,4 +56,5 @@ public class Author {
     public void setCountry(Country country) {
         this.country = country;
     }
+
 }

@@ -27,12 +27,11 @@ public interface BookService {
      * @param name
      * @param category
      * @param countryId
-     * @param availableCopies
      * @param author
      * @return The book that is created. The id should be generated when the book is created.
      * @throws InvalidCountryIdException when there is no hotel with the given id
      */
-    Book create(String name, Category category, Long countryId, Integer availableCopies, Long author);
+    Book create(String name, Category category, Long countryId, Long author);
 
     /**
      * This method is used to update a reservation, and save it in the database.
@@ -41,13 +40,12 @@ public interface BookService {
      * @param name
      * @param category
      * @param countryId
-     * @param availableCopies
      * @param author
      * @return The book that is updated.
      * @throws InvalidBookIdException when there is no book with the given id
      * @throws InvalidCountryIdException       when there is no county with the given id
      */
-    Book update(Long id, String name, Category category, Long countryId, Integer availableCopies, Long author);
+    Book update(Long id, String name, Category category, Long countryId, Long author);
 
     /**
      * @param id
@@ -64,7 +62,7 @@ public interface BookService {
      * @return is request ok.
      * @throws InvalidBookIdException when there is no book with the given id
      */
-    boolean rented(Long id);
+//    boolean rented(Long id);
 
     /**
      * Returns a page of books that match the given criteria.

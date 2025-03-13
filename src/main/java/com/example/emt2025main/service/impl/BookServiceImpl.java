@@ -42,15 +42,16 @@ public class BookServiceImpl implements BookService {
         return this.bookRepository.findById(id).orElseThrow(InvalidBookIdException::new);
     }
 
+
     @Override
-    public Book create(String name, Category category, Long countryId, Integer availableCopies, Long authorId) {
+    public Book create(String name, Category category, Long countryId,  Long authorId) {
         Country country = this.countyService.findById(countryId);
         Author author= this.authorService.findById(authorId);
-        return this.bookRepository.save(new Book(name, category,country, availableCopies,author));
+        return this.bookRepository.save(new Book(name, category,country, author));
     }
 
     @Override
-    public Book update(Long id,String name, Category category, Long countryId, Integer availableCopies, Long authorId) {
+    public Book update(Long id,String name, Category category, Long countryId, Long authorId) {
         Country country = this.countyService.findById(countryId);
         Book book = this.findById(id);
         Author author= this.authorService.findById(authorId);
@@ -59,7 +60,6 @@ public class BookServiceImpl implements BookService {
         book.setCategory(category);
         book.setAuthor(author);
         book.setCountry(country);
-        book.setAvailableCopies(availableCopies);
         return this.bookRepository.save(book);
     }
 
@@ -70,16 +70,6 @@ public class BookServiceImpl implements BookService {
         return book;
     }
 
-    @Override
-    public boolean rented(Long id) {
-        Book book = this.bookRepository.findById(id).orElseThrow(InvalidBookIdException::new);
-        if(book.getAvailableCopies() == 0){
-            return false;
-        }
-        book.setAvailableCopies(book.getAvailableCopies()-1);
-        this.bookRepository.save(book);
-        return true;
-    }
 
     @Override
     public Page<Book> findPage(String name, Category category, Long countryId,Long authorId, int pageNum, int pageSize) {

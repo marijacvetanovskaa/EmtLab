@@ -28,13 +28,6 @@ public class Book {
         this.name = name;
     }
 
-    public Integer getAvailableCopies() {
-        return availableCopies;
-    }
-
-    public void setAvailableCopies(Integer availableCopies) {
-        this.availableCopies = availableCopies;
-    }
 
     public Author getAuthor() {
         return author;
@@ -66,7 +59,6 @@ public class Book {
 
     private String name;
 
-    private Integer availableCopies;
 
     @OneToOne
     private Author author;
@@ -77,11 +69,11 @@ public class Book {
     @ManyToOne
     private Country country;
 
-    public Book(String name, Category category, Country country, Integer availableCopies, Author author) {
+    public Book(String name, Category category, Country country, Author author) {
         this.name = name;
-        this.availableCopies=availableCopies;
         this.category = category;
         this.country = country;
         this.author=author;
+
     }
 }

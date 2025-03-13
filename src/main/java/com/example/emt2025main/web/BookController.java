@@ -2,6 +2,7 @@ package com.example.emt2025main.web;
 
 import com.example.emt2025main.model.Book;
 import com.example.emt2025main.model.Category;
+import com.example.emt2025main.service.BookCopyService;
 import com.example.emt2025main.service.BookService;
 import com.example.emt2025main.web.dto.BookDto;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +17,11 @@ import java.util.List;
 public class BookController {
     private final BookService bookService;
 
-    public BookController(BookService bookService) {
+    private final BookCopyService bookCopyService;
+
+    public BookController(BookService bookService, BookCopyService bookCopyService) {
         this.bookService = bookService;
+        this.bookCopyService = bookCopyService;
     }
 
     @GetMapping({"/","/books"})
@@ -38,7 +42,7 @@ public class BookController {
     @PostMapping("/books/add")
     public ResponseEntity<Book> addNewBook(@RequestBody BookDto bookDto) {
         Book book = this.bookService.create(
-                bookDto.getName(), bookDto.getCategory(), bookDto.getCountryId(), bookDto.getAvailableCopies(), bookDto.getAuthorId());
+                bookDto.getName(), bookDto.getCategory(), bookDto.getCountryId(),  bookDto.getAuthorId());
 
         if (book != null) {
             return ResponseEntity.ok(book);
@@ -47,7 +51,7 @@ public class BookController {
     }
     @PutMapping("/books/edit/{id}")
     public ResponseEntity<Book> edit(@PathVariable Long id, @RequestBody BookDto bookDto){
-        Book book = this.bookService.update(id, bookDto.getName(), bookDto.getCategory(), bookDto.getCountryId(), bookDto.getAvailableCopies(), bookDto.getAuthorId());
+        Book book = this.bookService.update(id, bookDto.getName(), bookDto.getCategory(), bookDto.getCountryId(),bookDto.getAuthorId());
 
         if (book != null) {
             return ResponseEntity.ok(book);
@@ -63,7 +67,7 @@ public class BookController {
 
     @PostMapping("/books/rent/{id}")
     public ResponseEntity<Void> markTaken(@PathVariable Long id){
-        boolean isOK = this.bookService.rented(id);
+        boolean isOK = this.bookCopyService.rented(id);
         if(isOK){
             return ResponseEntity.ok().build();
         }
