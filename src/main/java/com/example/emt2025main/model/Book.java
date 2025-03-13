@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+//http://localhost:8080/swagger-ui/index.html
 public class Book {
 
     public Book() {
