@@ -14,6 +14,12 @@ public class BookCopy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Condition condition;
+
+    private boolean rented;
+
     public BookCopy() {
+        rented = true;
+        condition = Condition.FAIR;
     }
 }
