@@ -1,7 +1,9 @@
 package com.example.emt2025main.service.domain.impl;
 
 import com.example.emt2025main.model.domain.*;
+import com.example.emt2025main.model.views.BooksByAuthorView;
 import com.example.emt2025main.repository.BookRepository;
+import com.example.emt2025main.repository.BooksByAuthorRepository;
 import com.example.emt2025main.service.domain.BookService;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +15,11 @@ import java.util.Optional;
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
+    private final BooksByAuthorRepository booksByAuthorRepository;
 
-    public BookServiceImpl(BookRepository bookRepository) {
+    public BookServiceImpl(BookRepository bookRepository, BooksByAuthorRepository booksByAuthorRepository) {
         this.bookRepository = bookRepository;
+        this.booksByAuthorRepository = booksByAuthorRepository;
     }
 
     @Override
@@ -73,5 +77,15 @@ public class BookServiceImpl implements BookService {
             update(id, existing);
             return existing;
         });
+    }
+
+    @Override
+    public List<BooksByAuthorView> listAllBooksByAuthor() {
+        return booksByAuthorRepository.findAll();
+    }
+
+    @Override
+    public void refreshMaterializedView() {
+        booksByAuthorRepository.refreshMaterializedView();
     }
 }

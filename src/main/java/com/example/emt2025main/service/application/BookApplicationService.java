@@ -2,6 +2,7 @@ package com.example.emt2025main.service.application;
 
 import com.example.emt2025main.dto.CreateBookDto;
 import com.example.emt2025main.dto.DisplayBookDto;
+import com.example.emt2025main.dto.DisplayBooksByAuthorDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,4 +16,5 @@ public interface BookApplicationService {
     void deleteById(Long id);
     void addCopy(Long id);
     Optional<DisplayBookDto> rent(Long id);
+    List<DisplayBooksByAuthorDto> listBooksByAuthor();
 }

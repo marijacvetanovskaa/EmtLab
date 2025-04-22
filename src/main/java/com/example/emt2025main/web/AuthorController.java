@@ -2,6 +2,8 @@ package com.example.emt2025main.web;
 
 import com.example.emt2025main.dto.CreateAuthorDto;
 import com.example.emt2025main.dto.DisplayAuthorDto;
+import com.example.emt2025main.dto.DisplayAuthorNameDto;
+import com.example.emt2025main.dto.DisplayAuthorsByCountryDto;
 import com.example.emt2025main.service.application.AuthorApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -63,6 +65,18 @@ public class AuthorController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @Operation(summary = "List authors per country", description = "List authors per country")
+    @GetMapping("/by-country")
+    public List<DisplayAuthorsByCountryDto> getAuthorsPerCountry() {
+        return authorApplicationService.listAuthorsByCountry();
+    }
+
+    @Operation(summary = "List authors names", description = "List authors all authors names")
+    @GetMapping("/names")
+    public List<DisplayAuthorNameDto> getAuthorNames() {
+        return authorApplicationService.getAuthorNames();
     }
 
 }

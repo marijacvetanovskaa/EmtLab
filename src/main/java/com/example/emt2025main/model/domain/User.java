@@ -32,8 +32,9 @@ public class User implements UserDetails {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
-    @OneToOne
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private WishList wishList;
+
     public User() {
     }
 

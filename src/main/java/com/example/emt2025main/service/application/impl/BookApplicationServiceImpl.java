@@ -2,6 +2,7 @@ package com.example.emt2025main.service.application.impl;
 
 import com.example.emt2025main.dto.CreateBookDto;
 import com.example.emt2025main.dto.DisplayBookDto;
+import com.example.emt2025main.dto.DisplayBooksByAuthorDto;
 import com.example.emt2025main.model.domain.Author;
 import com.example.emt2025main.model.domain.Country;
 import com.example.emt2025main.service.domain.AuthorService;
@@ -63,5 +64,10 @@ public class BookApplicationServiceImpl implements BookApplicationService {
     @Override
     public Optional<DisplayBookDto> rent(Long id) {
         return bookService.rent(id).map(DisplayBookDto::from);
+    }
+
+    @Override
+    public List<DisplayBooksByAuthorDto> listBooksByAuthor() {
+        return bookService.listAllBooksByAuthor().stream().map(DisplayBooksByAuthorDto::from).toList();
     }
 }

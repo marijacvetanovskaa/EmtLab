@@ -2,6 +2,7 @@ package com.example.emt2025main.web;
 
 import com.example.emt2025main.dto.CreateBookDto;
 import com.example.emt2025main.dto.DisplayBookDto;
+import com.example.emt2025main.dto.DisplayBooksByAuthorDto;
 import com.example.emt2025main.service.application.BookApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -82,5 +83,11 @@ public class BookController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @Operation(summary = "List number of books per author", description = "List number of books per author")
+    @GetMapping("/by-author")
+    public List<DisplayBooksByAuthorDto> getBooksByAuthor() {
+        return bookApplicationService.listBooksByAuthor();
     }
 }

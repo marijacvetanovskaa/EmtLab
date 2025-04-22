@@ -2,6 +2,8 @@ package com.example.emt2025main.service.application.impl;
 
 import com.example.emt2025main.dto.CreateAuthorDto;
 import com.example.emt2025main.dto.DisplayAuthorDto;
+import com.example.emt2025main.dto.DisplayAuthorNameDto;
+import com.example.emt2025main.dto.DisplayAuthorsByCountryDto;
 import com.example.emt2025main.model.domain.Country;
 import com.example.emt2025main.service.domain.AuthorService;
 import com.example.emt2025main.service.domain.CountryService;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthorApplicationServiceImpl implements AuthorApplicationService {
@@ -47,5 +50,15 @@ public class AuthorApplicationServiceImpl implements AuthorApplicationService {
     @Override
     public void deleteById(Long id) {
         authorService.deleteById(id);
+    }
+
+    @Override
+    public List<DisplayAuthorsByCountryDto> listAuthorsByCountry() {
+        return authorService.getAuthorsByCountry().stream().map(DisplayAuthorsByCountryDto::from).toList();
+    }
+
+    @Override
+    public List<DisplayAuthorNameDto> getAuthorNames() {
+        return authorService.getAuthorNames().stream().map(DisplayAuthorNameDto::from).collect(Collectors.toList());
     }
 }
