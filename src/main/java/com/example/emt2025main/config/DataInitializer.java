@@ -2,7 +2,6 @@ package com.example.emt2025main.config;
 
 import com.example.emt2025main.model.domain.*;
 import com.example.emt2025main.repository.*;
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -25,7 +24,7 @@ public class DataInitializer {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @PostConstruct
+//    @PostConstruct
     public void init() {
         Country country = countyRepository.save(new Country("Macedonia", "Europe"));
         Author author = authorRepository.save(new Author("Krste", "Petkov Misirkov", country));
